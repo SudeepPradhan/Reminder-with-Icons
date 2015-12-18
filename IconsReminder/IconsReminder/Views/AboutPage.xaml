@@ -1,0 +1,50 @@
+﻿<Page
+    x:Class="IconsReminder.AboutPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:IconsReminder"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=AboutViewModel}"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+        </Grid.RowDefinitions>
+        <local:HeaderControl Grid.Row="0" HeadingName="About"/>
+        <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center">
+            <TextBlock
+                Text="Icons Reminder" 
+                FontWeight="Bold"
+                HorizontalAlignment="Center" />
+            <TextBlock 
+                Text="Developed by Sudeep Pradhan" 
+                HorizontalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock
+                    Text="Icons are from" 
+                    FontSize="10" 
+                    Padding="0,0,1,0"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" />
+                <HyperlinkButton 
+                    Content="Icons8"
+                    NavigateUri="https://icons8.com"
+                    FontSize="10"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton 
+                    Label="Home" 
+                    Icon="Home"
+                    Command="{Binding HomeCommand}"/>
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>

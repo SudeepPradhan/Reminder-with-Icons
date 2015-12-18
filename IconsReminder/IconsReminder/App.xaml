@@ -1,0 +1,32 @@
+﻿<Application
+    x:Class="IconsReminder.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:IconsReminder"
+    xmlns:converter="using:IconsReminder.Converter"
+    RequestedTheme="Light">
+    <Application.Resources>
+         <!-- Application-specific resources -->
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            
+            <local:ViewModelLocator x:Key="ViewModelLocator"/>
+            
+            <converter:ToUpperCaseCoverter x:Name="ToUpperCaseCoverter"/>
+            <converter:ToDateTimeValueConverter x:Name="ToDateTimeValueConverter"/>
+            <converter:TimeToBorderColorConverter x:Name="TimeToBorderColorConverter"/>
+            <converter:RemainingTimeConverter x:Name="RemainingTimeConverter"/>
+            <converter:NoReminderMessageConverter x:Name="NoReminderMessageConverter"/>
+            <converter:NoPastReminderMessageConverter x:Name="NoPastReminderMessageConverter"/>
+
+            <ItemsPanelTemplate x:Key="ReminderItemsWrapGrid">
+                <ItemsWrapGrid MaximumRowsOrColumns="3" Orientation="Horizontal"/>
+            </ItemsPanelTemplate>
+            <ItemsPanelTemplate x:Key="AddItemsWrapGrid">
+                <ItemsWrapGrid MaximumRowsOrColumns="6" Orientation="Horizontal"/>
+            </ItemsPanelTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

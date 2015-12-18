@@ -1,0 +1,125 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Base styles-->
+
+    <!-- TextBlock styles-->
+    <Style x:Key="IconName" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="FontFamily" Value="Segoe WP Semilight"/>
+    </Style>
+    <Style x:Key="IconTitle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontFamily" Value="Segoe WP Semilight"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Padding" Value="10,5,10,5"/>
+    </Style>
+    <Style x:Key="IconDateTime" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="FontFamily" Value="Segoe WP Semilight"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Padding" Value="0,0,0,0"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+    <Style x:Key="ItemDescription" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Padding" Value="8,0,5,0"/>
+    </Style>
+    <Style x:Key="IRTitleHeading" TargetType="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Style" Value="{ThemeResource BaseTextBlockStyle}"/>
+    </Style>
+    <Style x:Key="ReminderHeader" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe WP Semilight"/>
+        <Setter Property="FontSize" Value="28"/>
+        <Setter Property="Foreground" Value="#CC1953EE"/>
+    </Style>
+    <!-- Button styles-->
+    <Style x:Key="FooterButton" TargetType="Button">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="Height" Value="50"/>
+    </Style>
+    <Style x:Key="HyperlinkStyle" TargetType="HyperlinkButton">
+        <Setter Property="Padding" Value="2"/>
+        <Setter Property="Foreground" Value="Gray"/>
+    </Style>
+    <!-- GridView styles-->
+    <Style x:Key="MainPageRootGridLandscapeStyle" TargetType="Grid">
+        <Setter Property="Margin" Value="42,0,0,0"/>
+    </Style>
+    <Style x:Key="MainPageRootGridPortraitStyle" TargetType="Grid">
+        <Setter Property="Margin" Value="0,0,0,0"/>
+    </Style>
+    <Style x:Key="ScenarioRootGridLandscapeStyle" TargetType="Grid">
+        <Setter Property="Margin" Value=" 42,20,12,12"/>
+    </Style>
+    <Style x:Key="ScenarioRootGridPortraitStyle" TargetType="Grid">
+        <Setter Property="Margin" Value="12,20,12,12"/>
+    </Style>
+    <Style x:Key="ReminderGridView" TargetType="GridView">
+        <Setter Property="ShowsScrollingPlaceholders" Value="False"/>
+        <Setter Property="ScrollViewer.VerticalScrollMode" Value="Enabled"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible"/>
+        <Setter Property="ScrollViewer.IsVerticalRailEnabled" Value="True"/>
+        <Setter Property="SelectionMode" Value="None"/>
+        <Setter Property="ItemContainerStyle" Value="{StaticResource ReminderGridViewItem}"/>
+    </Style>
+    <Style x:Key="ReminderGridViewItem" TargetType="GridViewItem">
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="TabNavigation" Value="Local"/>
+    </Style>
+    <Style x:Key="AddItemGridView" TargetType="GridView">
+        <Setter Property="ShowsScrollingPlaceholders" Value="False"/>
+        <Setter Property="ScrollViewer.VerticalScrollMode" Value="Enabled"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible"/>
+        <Setter Property="ScrollViewer.IsVerticalRailEnabled" Value="True"/>
+        <Setter Property="SelectionMode" Value="None"/>
+        <Setter Property="ItemContainerStyle" Value="{StaticResource AddItemGridViewItem}"/>
+    </Style>
+    <Style x:Key="AddItemGridViewItem" TargetType="GridViewItem">
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Width" Value="60"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="TabNavigation" Value="Local"/>
+    </Style>
+    <!-- Border styles-->
+    <Style x:Key="IRTitleBorderStyle" TargetType="Border">
+        <Setter Property="Padding" Value="18,2,12,0"/>
+        <Setter Property="Height" Value="{ThemeResource AppBarThemeCompactHeight}"/>
+        <Setter Property="RequestedTheme" Value="Dark"/>
+        <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundAccentBrush}"/>
+    </Style>
+    <!-- MenuFlyoutItem styles-->
+    <Style x:Key="IRMenuFlyoutItem" TargetType="MenuFlyoutItem">
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Width" Value="10"/>
+    </Style>
+    <!-- Others styles-->
+    <Style x:Key="IconImage" TargetType="Image">
+        <Setter Property="Height" Value="26"/>
+        <Setter Property="Width" Value="26"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0,0,0,0"/>
+    </Style>
+</ResourceDictionary>
