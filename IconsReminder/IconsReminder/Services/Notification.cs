@@ -45,12 +45,6 @@
             CreateToastNotification(item, timeSpan);
         }
 
-        public void UpdateTileAndToastNotification(string notificationId, DateTime dateTime)
-        {
-            UpdateTileNotification(notificationId, dateTime);
-            UpdateToastNotification(notificationId, dateTime);
-        }
-
         public void RemoveTileAndToastNotification(string notificationId)
         {
             RemoveTileNotification(notificationId);
@@ -59,7 +53,13 @@
 
         private void CreateTileNotification(IItem item, TimeSpan timeSpan)
         {
-            if (timeSpan < new TimeSpan(0, 0, 0)) return;
+            if (timeSpan <= TimeSpan.Zero) return;
+
+            var _tileSchedules = tileNotifier.GetScheduledTileNotifications();
+            if (_tileSchedules.Where(x => x.Id == item.Reminder.NotificationId) != null)
+            {
+                RemoveTileNotification(item.Reminder.NotificationId);
+            }
 
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(TileNotificationContent);
@@ -68,85 +68,53 @@
                 if (textEl.InnerText == "Title")
                     textEl.InnerText = String.Format("You have a reminder for '{0}'!", item.Title);
 
-            ScheduledTileNotification scheduleTile = new ScheduledTileNotification(doc, DateTime.Now.Add(timeSpan));
-            scheduleTile.Id = item.Reminder.NotificationId;
+            ScheduledTileNotification scheduleTile = new ScheduledTileNotification(doc, DateTime.Now.Add(timeSpan))
+            {
+                Id = item.Reminder.NotificationId,
+                ExpirationTime = DateTime.Now.Add(timeSpan).AddHours(5)
+            };
             tileNotifier.AddToSchedule(scheduleTile);
         }
 
         private void CreateToastNotification(IItem item, TimeSpan timeSpan)
         {
-            if (timeSpan < new TimeSpan(0, 0, 0)) return;
+            if (timeSpan <= TimeSpan.Zero) return;
+
+            var _toastSchedule = toastNotifier.GetScheduledToastNotifications();
+            if (_toastSchedule.Where(x => x.Id == item.Reminder.NotificationId) != null)
+            {
+                RemoveToastNotification(item.Reminder.NotificationId);
+            }
 
             ToastTemplateType toastType = ToastTemplateType.ToastText01;
             XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastType);
             XmlNodeList toastTextElement = toastXml.GetElementsByTagName("text");
             toastTextElement[0].AppendChild(toastXml.CreateTextNode(String.Format("You have a reminder for '{0}'!", item.Title)));
 
-            ScheduledToastNotification scheduleToast = new ScheduledToastNotification(
-                toastXml,
-                DateTime.Now.Add(timeSpan));
-            scheduleToast.Id = item.Reminder.NotificationId;
+            ScheduledToastNotification scheduleToast =
+                new ScheduledToastNotification(toastXml, DateTime.Now.Add(timeSpan))
+                {
+                    Id = item.Reminder.NotificationId
+                };
             toastNotifier.AddToSchedule(scheduleToast);
-        }
-
-        private void UpdateTileNotification(string notificationId, DateTime dateTime)
-        {
-            var _tileSchedules = tileNotifier.GetScheduledTileNotifications();
-            foreach (var schedule in _tileSchedules)
-            {
-                if (schedule.Id == notificationId)
-                {
-                    RemoveTileNotification(notificationId);
-
-                    ScheduledTileNotification scheduleTile = new ScheduledTileNotification(schedule.Content, (DateTimeOffset)dateTime);
-                    scheduleTile.Id = notificationId;
-                    tileNotifier.AddToSchedule(scheduleTile);
-                    break;
-                }
-            }
-        }
-
-        private void UpdateToastNotification(string notificationId, DateTime dateTime)
-        {
-            var _toastSchedules = toastNotifier.GetScheduledToastNotifications();
-            foreach (var schedule in _toastSchedules)
-            {
-                if (schedule.Id == notificationId)
-                {
-                    RemoveToastNotification(notificationId);
-
-                    ScheduledToastNotification scheduleToast = new ScheduledToastNotification(schedule.Content, (DateTimeOffset)dateTime);
-                    scheduleToast.Id = notificationId;
-                    toastNotifier.AddToSchedule(scheduleToast);
-                    break;
-                }
-            }
         }
 
         private void RemoveTileNotification(string notificationId)
         {
-            var _schedules = tileNotifier.GetScheduledTileNotifications();
-            foreach (var schedule in _schedules)
+            var _tileSchedules = tileNotifier.GetScheduledTileNotifications().FirstOrDefault(x => x.Id == notificationId);
+            if (_tileSchedules != null)
             {
-                if (schedule.Id == notificationId)
-                {
-                    tileNotifier.RemoveFromSchedule(schedule);
-                    break; 
-                }
+                tileNotifier.RemoveFromSchedule(_tileSchedules);
             }
             tileNotifier.Clear();
         }
 
         private void RemoveToastNotification(string notificationId)
         {
-            var _schedules = toastNotifier.GetScheduledToastNotifications();
-            foreach (var schedule in _schedules)
+            var _toastSchedule = toastNotifier.GetScheduledToastNotifications().FirstOrDefault(x => x.Id == notificationId);
+            if (_toastSchedule != null)
             {
-                if (schedule.Id == notificationId)
-                {
-                    toastNotifier.RemoveFromSchedule(schedule);
-                    break;
-                }
+                toastNotifier.RemoveFromSchedule(_toastSchedule);
             }
         }
     }
