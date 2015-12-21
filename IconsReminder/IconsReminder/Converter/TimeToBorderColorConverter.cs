@@ -1,7 +1,9 @@
 ﻿namespace IconsReminder.Converter
 {
     using System;
+    using Windows.Foundation;
     using Windows.UI;
+    using Windows.UI.Xaml;
     using Windows.UI.Xaml.Data;
     using Windows.UI.Xaml.Media;
 
@@ -14,11 +16,11 @@
             TimeSpan? _timeSpan = (TimeSpan)value;
 
             if (_timeSpan < TimeSpan.Zero)
-                return new SolidColorBrush(Colors.Red);
+                return Application.Current.Resources["IRBorderColorRed"] as LinearGradientBrush;
             else if(_timeSpan == TimeSpan.Zero)
-                return new SolidColorBrush(Colors.Gray);
+                return new SolidColorBrush(Colors.Gray); 
             else
-                return new SolidColorBrush(Colors.DeepSkyBlue);
+                return Application.Current.Resources["IRBorderColor"] as LinearGradientBrush;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

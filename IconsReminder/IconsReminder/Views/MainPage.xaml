@@ -44,10 +44,13 @@
                             <TextBlock 
                                 Text="{Binding Reminder.ReminderDateTime, Converter={StaticResource ToDateTimeValueConverter}}" 
                                 TextWrapping="Wrap"
-                                Style="{StaticResource IconDateTime}"/>
-                            <TextBlock HorizontalAlignment="Right"
+                                Style="{StaticResource IconDateTime}"
+                                Foreground="#FF6464F1"/>
+                            <TextBlock 
                                 Text="{Binding Reminder.RemainingTime, Converter={StaticResource RemainingTimeConverter}}"
-                                Style="{StaticResource IconDateTime}"/>
+                                Style="{StaticResource IconDateTime}"
+                                Foreground="#FF6464F1"
+                                HorizontalAlignment="Right"/>
                         </StackPanel>
                     </Grid>
                 </Border>
